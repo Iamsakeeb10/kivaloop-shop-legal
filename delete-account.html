@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account & Data Deletion - Kivaloop Shop Partner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        Kivaloop Partner
+        <span class="brand-badge">Legal</span>
+      </a>
+      <nav class="nav-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="delete-account.html" class="active">Delete Account</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h1 class="page-title">Account & Data Deletion Request</h1>
+      <p class="meta-info"><strong>App Name:</strong> Kivaloop Shop Partner &nbsp;|&nbsp; <strong>Package:</strong> com.mobile.kivaloopShop</p>
+
+      <div class="danger-box">
+        <strong>Important Notice:</strong> Deleting your Kivaloop Shop Partner account is permanent and cannot be undone. All your business profile data, menu items, images, and partner records will be wiped from our active databases.
+      </div>
+
+      <h2>How to Delete Your Account</h2>
+      <p>As per Google Play Developer Policy, we provide two convenient ways to request full deletion of your account and associated personal data:</p>
+
+      <h3>Method 1: Directly Inside the Mobile App (Instant)</h3>
+      <p>If you currently have the app installed on your phone:</p>
+      <ol>
+        <li>Open the <strong>Kivaloop Shop Partner</strong> app.</li>
+        <li>Log in to your account.</li>
+        <li>Tap the <strong>Profile</strong> tab in the bottom navigation bar.</li>
+        <li>Scroll to the bottom of the profile screen.</li>
+        <li>Tap the <strong>Delete Account</strong> button.</li>
+        <li>Confirm the action in the prompt by tapping <strong>Delete Permanently</strong>.</li>
+      </ol>
+      <p><em>Your account, shop documents, and menu catalog are deleted immediately upon confirmation.</em></p>
+
+      <hr style="margin: 32px 0; border: none; border-top: 1px solid var(--border);">
+
+      <h3>Method 2: Web Deletion Request (Without Installing the App)</h3>
+      <p>If you have uninstalled the app or cannot log in, you can request account deletion by submitting your registered account details below:</p>
+
+      <form onsubmit="handleWebDeletion(event)" style="background: var(--light-bg); padding: 24px; border-radius: 12px; border: 1px solid var(--border); margin: 20px 0;">
+        <div class="form-group">
+          <label for="registeredEmail">Registered Shop Partner Email Address *</label>
+          <input type="email" id="registeredEmail" class="form-control" placeholder="partner@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="shopName">Shop Name (Optional)</label>
+          <input type="text" id="shopName" class="form-control" placeholder="e.g. Daily Coffee House">
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Reason for Deletion (Optional)</label>
+          <textarea id="reason" class="form-control" rows="3" placeholder="Tell us why you wish to delete your account (helps us improve)"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-danger">Submit Deletion Request &rarr;</button>
+      </form>
+
+      <div id="confirmationNotice" style="display: none;" class="alert-box">
+        <strong>Request Submitted!</strong> An email deletion ticket has been initiated. If your mail client did not open automatically, please send an email to <a href="mailto:support@kivaloop.com?subject=Account%20Deletion%20Request">support@kivaloop.com</a> with subject "Account Deletion Request".
+      </div>
+
+      <h2>Data Types That Will Be Deleted</h2>
+      <p>When your account is deleted, the following data is permanently purged:</p>
+      <ul>
+        <li><strong>Authentication Credentials:</strong> Your email address, encrypted authentication records, and user UID in Google Firebase.</li>
+        <li><strong>Shop Profile & Business Details:</strong> Store name, description, address, city, ZIP code, operating hours, and weekly schedule in Cloud Firestore.</li>
+        <li><strong>Location Data:</strong> Geolocation coordinates associated with your store.</li>
+        <li><strong>Menu & Inventory:</strong> All item names, descriptions, categories, prices, and options.</li>
+        <li><strong>Media & Images:</strong> Store logo, banner, and item pictures hosted on Cloudinary.</li>
+      </ul>
+
+      <h2>Data Retention Policy</h2>
+      <p>
+        <strong>Operational data:</strong> Deleted immediately upon in-app action or within <strong>7 business days</strong> upon receiving a web request.<br>
+        <strong>Legal & Financial records:</strong> Any completed historical payment or invoice receipts required by local taxation, accounting, or anti-fraud laws may be securely archived in anonymized form for the legally mandated period.
+      </p>
+
+      <h2>Need Help?</h2>
+      <p>For any inquiries or assistance regarding account deletion, please contact our support team:</p>
+      <div class="alert-box">
+        Email: <a href="mailto:support@kivaloop.com">support@kivaloop.com</a><br>
+        Developer: <a href="mailto:iamsakeeb10@gmail.com">iamsakeeb10@gmail.com</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 Kivaloop. All rights reserved. &bull; <a href="privacy-policy.html">Privacy Policy</a> &bull; <a href="delete-account.html">Delete Account</a> &bull; <a href="terms.html">Terms of Service</a>
+  </footer>
+
+  <script>
+    function handleWebDeletion(e) {
+      e.preventDefault();
+      var email = document.getElementById('registeredEmail').value;
+      var shopName = document.getElementById('shopName').value;
+      var reason = document.getElementById('reason').value;
+
+      var subject = encodeURIComponent("Account Deletion Request - " + email);
+      var body = encodeURIComponent(
+        "Hello Kivaloop Support,\n\n" +
+        "Please delete my Kivaloop Shop Partner account and all associated data.\n\n" +
+        "Registered Email: " + email + "\n" +
+        "Shop Name: " + (shopName || "N/A") + "\n" +
+        "Reason: " + (reason || "Not specified") + "\n\n" +
+        "Thank you."
+      );
+
+      window.location.href = "mailto:support@kivaloop.com?subject=" + subject + "&body=" + body;
+      document.getElementById('confirmationNotice').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
